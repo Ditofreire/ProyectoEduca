@@ -1,0 +1,37 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Compilar proyecto C++",
+            "command": "g++",
+            "args": [
+                "-std=c++17",
+                "-Wall",
+                "-Wextra",
+                "-g",
+
+                "-I",
+                "${workspaceFolder}/Include",
+
+                "${workspaceFolder}/Source/main.cpp",
+                "${workspaceFolder}/Source/Usuario.cpp",
+                "${workspaceFolder}/Source/GestorUsuarios.cpp",
+
+                "-o",
+                "${workspaceFolder}/main.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Compila el proyecto completo usando g++ disponible en PATH."
+        }
+    ]
+}
