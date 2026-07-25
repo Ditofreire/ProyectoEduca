@@ -81,18 +81,22 @@ Ejemplo de configuración:
     "tasks": [
         {
             "type": "shell",
-            "label": "Compilar proyecto C++",
+            "label": "Compilar ProyectoEduca",
             "command": "g++",
             "args": [
                 "-std=c++17",
                 "-Wall",
                 "-Wextra",
                 "-g",
+
                 "-I",
-                "${workspaceFolder}/include",
+                "${workspaceFolder}/Include",
+
                 "${workspaceFolder}/src/main.cpp",
                 "${workspaceFolder}/src/Usuario.cpp",
                 "${workspaceFolder}/src/GestorUsuarios.cpp",
+                "${workspaceFolder}/src/GestorTXT.cpp",
+
                 "-o",
                 "${workspaceFolder}/main.exe"
             ],
@@ -105,7 +109,8 @@ Ejemplo de configuración:
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+            "detail": "Compila todos los archivos fuente de ProyectoEduca con C++17."
         }
     ]
 }
