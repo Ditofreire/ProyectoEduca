@@ -108,8 +108,8 @@
     }
 
     std::string linea;// Aquí se almacenará temporalmente cada línea leída.
-    int usuariosCargados = 0;
-    int lineasInvalidas = 0;
+    int usuariosCargados = 0;// contadores usados en try-catch
+    int lineasInvalidas = 0;// cont
 
     while (std::getline(archivo, linea)) {
 
@@ -138,7 +138,7 @@
             std::string apodo = datos[2];
             std::string contrasenia = datos[3];
 
-            int edad = std::stoi(datos[4]);
+            int edad = std::stoi(datos[4]);//stoi=string to int
             int dia = std::stoi(datos[5]);
             int mes = std::stoi(datos[6]);
             int anio = std::stoi(datos[7]);
@@ -182,12 +182,13 @@
                 lineasInvalidas++;
             }
         }
+
         catch (const std::exception& error) {
             std::cout << "Error leyendo linea: "
                       << linea << "\n";
 
             std::cout << "Detalle: "
-                      << error.what() << "\n";
+                      << error.what() << "\n";// Sirve para tener
 
             lineasInvalidas++;
         }
@@ -216,3 +217,22 @@
 
     return false;
     }
+
+    /*
+    Try, throw y catch
+    try   -> intenta ejecutar una operación
+    throw -> avisa que ocurrió un error
+    catch -> recibe y maneja ese error
+    
+    sintaxis:
+    try {
+        // Código que podría fallar
+    }
+    catch (const TipoDeError& error) {
+        // Qué hacer si ocurre el error
+    }
+
+Se usó try, throw y catch para separar el manejo de errores del flujo principal y evitar una cadena extensa de if-else;
+estas palabras son parte del lenguaje. Esto mejora la lectura, facilita capturar distintos fallos y permite mostrar su detalle
+ mediante what(). undertale!
+    */
