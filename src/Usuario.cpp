@@ -10,7 +10,7 @@ int Usuarios::siguienteID = 1;//No error en
     }
     //getters
 
-    int Fecha::getdia() const{
+    int Fecha::getdia() const{ 
         return dia;
     }
     int Fecha::getmes() const {

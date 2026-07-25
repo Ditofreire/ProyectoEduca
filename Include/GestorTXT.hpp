@@ -1,7 +1,7 @@
 #ifndef GESTOR_TXT_HPP
 #define GESTOR_TXT_HPP
 
-#include <string>
+#include <string> 
 
 // Declaración anticipada para evitar includes circulares
 class GestorUsuarios; //Esto solo dice: Existe una clase con ese nombre y su definicion aparecera despues.

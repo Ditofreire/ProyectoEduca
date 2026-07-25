@@ -2,7 +2,7 @@
 #define Usuario_HPP
 #include <ostream>//sobrecarga
 #include<string>
-
+ 
 class Fecha{
     private:
     int dia;

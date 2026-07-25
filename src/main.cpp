@@ -10,7 +10,7 @@ int main()
 
     gestor.setUsuario(
         new Estudiante(
-            "Gerardo",
+            "Gerardo", 
             "Dito",
             "clave123",
             25,

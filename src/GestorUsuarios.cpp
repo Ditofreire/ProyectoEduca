@@ -22,7 +22,7 @@ GestorUsuarios::~GestorUsuarios(){
     // Eliminamos el arreglo de punteros
     delete[] usuarios;
      usuarios = nullptr;
-}
+} 
 
 // Aumentar capacidad
 void GestorUsuarios::redimensionar(){

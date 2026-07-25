@@ -1,0 +1,120 @@
+# Proyecto Educa
+
+Proyecto académico desarrollado en C++ para gestionar usuarios de una plataforma educativa.
+
+El objetivo es aplicar conceptos de programación orientada a objetos, herencia, polimorfismo, memoria dinámica y almacenamiento en archivos TXT.
+
+## ¿Qué busca el proyecto?
+
+El sistema tendrá dos tipos de usuarios:
+
+* **Estudiante:** podrá acceder al contenido educativo.
+* **Publisher:** podrá publicar y cargar contenido.
+
+Los usuarios se administrarán en memoria mediante un arreglo dinámico y posteriormente se guardarán en archivos TXT.
+
+## Implementado
+
+Actualmente se encuentra implementado:
+
+* Clase `Fecha`.
+* Validación básica de fechas.
+* Clase abstracta `Usuarios`.
+* Clases derivadas `Estudiante` y `Publisher`.
+* Identificadores automáticos para usuarios.
+* Verificación y cambio de contraseña.
+* Impresión de los datos de cada usuario.
+* Clase `GestorUsuarios`.
+* Arreglo dinámico de punteros a usuarios.
+* Redimensionamiento automático del arreglo.
+* Liberación de memoria mediante destructor.
+
+## En implementación
+
+Actualmente se está trabajando en:
+
+* Validación de apodos repetidos.
+* Validación de correos repetidos.
+* Clase `GestorTXT`.
+* Guardado de usuarios en archivos TXT.
+* Carga de usuarios desde archivos TXT.
+* Administración del contenido educativo.
+
+Algunos métodos relacionados con contenido todavía están declarados, pero no implementados.
+
+## Advertencias del compilador
+
+Actualmente pueden aparecer advertencias como:
+
+```text
+warning: unused parameter
+```
+
+Estas advertencias se producen porque algunas funciones todavía son provisionales y reciben parámetros que no utilizan.
+
+Ejemplo:
+
+```cpp
+bool Usuarios::Apodovalido(const std::string&) const
+{
+    return true;
+}
+```
+
+No impiden compilar ni ejecutar el programa. Se corregirán cuando se implementen las validaciones completas.
+
+## Compilación con Visual Studio Code
+
+El archivo `.vscode/tasks.json` utiliza:
+
+```json
+"command": "g++"
+```
+
+Esto permite que cada persona use su propia instalación de `g++`, siempre que esté agregada al `PATH`.
+
+Ejemplo de configuración:
+
+```json
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Compilar proyecto C++",
+            "command": "g++",
+            "args": [
+                "-std=c++17",
+                "-Wall",
+                "-Wextra",
+                "-g",
+                "-I",
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/src/main.cpp",
+                "${workspaceFolder}/src/Usuario.cpp",
+                "${workspaceFolder}/src/GestorUsuarios.cpp",
+                "-o",
+                "${workspaceFolder}/main.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
+```
+
+Para compilar en Visual Studio Code:
+
+```text
+Ctrl + Shift + B
+```
+
+Cada usuario debe tener instalado `g++` y configurado en el `PATH`.
