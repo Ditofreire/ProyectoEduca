@@ -88,6 +88,13 @@ int Usuarios::siguienteID = 1;//No error en
     int Usuarios::getID() const{
         return ID;
     }
+    const Fecha& Usuarios::getFechaNacimiento() const{
+        return Fechanacimiento;
+    }
+
+    const std::string& Usuarios::getContrasenia() const{
+        return contrasenia;
+    }
     //setters
     void Usuarios::setNombre(std::string const &NuevoNombre){
             nombre=NuevoNombre;

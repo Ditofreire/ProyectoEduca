@@ -43,6 +43,8 @@ class Usuarios{
     const std::string& getApodo() const;
     int getEdad() const;
     int getID() const;
+    const Fecha& getFechaNacimiento() const;
+    const std::string& getContrasenia() const;
     //setters
     void setNombre(std::string const &NuevoNombre);
     void setApodo (const std::string& NuevoApodo);
