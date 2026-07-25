@@ -2,8 +2,11 @@
 #include "../Include/GestorUsuarios.hpp"
 #include "../include/Usuario.hpp"
 
-#include <fstream>//Trabajar archivos
-#include <iostream>
+#include <fstream>    // std::ifstream para leer y std::ofstream para escribir archivos.
+#include <sstream>   // std::stringstream para separar una línea en diferentes campos.
+#include <iostream>  // std::cout para mostrar mensajes en consola.
+#include <vector>    // std::vector para almacenar temporalmente los campos de cada línea.
+#include <exception> // std::exception usada en el bloque catch.
 
  // Constructor y destructor
     explicit GestorTXT::GestorTXT(const std::string& ruta): rutaUsuarios(ruta){}
@@ -25,26 +28,30 @@
 
     // Métodos de persistencia
     bool GestorTXT::guardarUsuarios(const GestorUsuarios& gestor) const{
-        
-        std::ofstream archivo(rutaUsuarios); //Crea un obj llamado archivo para escribir datos en un txt.
+    
+    std::ofstream archivo(rutaUsuarios);// std::ofstream se utiliza para escribir datos en archivos.
 
-        if (!archivo.is_open()) {
-            std::cout << "Error: no se pudo abrir el archivo de usuarios\n";
-            return false;
-        }
+    
+    if (!archivo.is_open()) {
+        std::cout << "Error: no se pudo abrir el archivo de usuarios\n";
+        return false;
+    }
+
 
         for (int i = 0; i < gestor.getCantidad(); i++) {
 
         Usuarios* usuario = gestor.getUsuario(i);
 
         if (usuario == nullptr) {
-            continue;//ignore
+            continue; // ignoramos esa iteración y pasamos al siguiente usuario.
         }
 
         const Fecha& fecha = usuario->getFechaNacimiento();
 
         Estudiante* estudiante =
             dynamic_cast<Estudiante*>(usuario);
+            // dynamic_cast intenta convertir el puntero base Usuarios*
+            // en un puntero de tipo Estudiante*.
 
         if (estudiante != nullptr) {
             archivo << "ESTUDIANTE" << "|"
@@ -87,10 +94,125 @@
 
     }
     bool GestorTXT::cargarUsuarios(GestorUsuarios& gestor) const{
+    
+    if (!archivoExiste(rutaUsuarios)) {
+        std::cout << "Error: el archivo de usuarios no existe\n";
+        return false;
+    }
 
+    std::ifstream archivo(rutaUsuarios); //sirve para leer archivos.
+
+    if (!archivo.is_open()) {
+        std::cout << "Error: no se pudo abrir el archivo\n";
+        return false;
+    }
+
+    std::string linea;// Aquí se almacenará temporalmente cada línea leída.
+    int usuariosCargados = 0;
+    int lineasInvalidas = 0;
+
+    while (std::getline(archivo, linea)) {
+
+        if (linea.empty()) {
+            continue;
+        }
+
+        std::stringstream separador(linea);//va leyendo el contenido del string y separándolo según espacios.
+        std::vector<std::string> datos;
+        std::string campo;
+
+        while (std::getline(separador, campo, '|')) {
+            datos.push_back(campo);
+        }
+
+        // Ambos tipos tienen exactamente nueve campos.
+        if (datos.size() != 9) {
+            std::cout << "Linea invalida: " << linea << "\n";
+            lineasInvalidas++;
+            continue;
+        }
+
+        try {
+            std::string tipo = datos[0];
+            std::string nombre = datos[1];
+            std::string apodo = datos[2];
+            std::string contrasenia = datos[3];
+
+            int edad = std::stoi(datos[4]);
+            int dia = std::stoi(datos[5]);
+            int mes = std::stoi(datos[6]);
+            int anio = std::stoi(datos[7]);
+
+            std::string datoEspecifico = datos[8];
+
+            Fecha fecha(dia, mes, anio);
+
+            if (tipo == "ESTUDIANTE") {
+
+                Usuarios* nuevo = new Estudiante(
+                    nombre,
+                    apodo,
+                    contrasenia,
+                    edad,
+                    fecha,
+                    datoEspecifico
+                );
+
+                gestor.setUsuario(nuevo);
+                usuariosCargados++;
+            }
+            else if (tipo == "PUBLISHER") {
+
+                Usuarios* nuevo = new Publisher(
+                    nombre,
+                    apodo,
+                    contrasenia,
+                    edad,
+                    fecha,
+                    datoEspecifico
+                );
+
+                gestor.setUsuario(nuevo);
+                usuariosCargados++;
+            }
+            else {
+                std::cout << "Tipo de usuario desconocido: "
+                          << tipo << "\n";
+
+                lineasInvalidas++;
+            }
+        }
+        catch (const std::exception& error) {
+            std::cout << "Error leyendo linea: "
+                      << linea << "\n";
+
+            std::cout << "Detalle: "
+                      << error.what() << "\n";
+
+            lineasInvalidas++;
+        }
+    }
+
+    archivo.close();
+
+    std::cout << "Usuarios cargados: "
+              << usuariosCargados << "\n";
+
+    std::cout << "Lineas invalidas: "
+              << lineasInvalidas << "\n";
+
+    return true;
     }
 
     // Comprobación
     bool GestorTXT::archivoExiste(const std::string& ruta) const{
+    
+        std::ifstream archivo(ruta);
 
+    if (archivo.is_open()) {
+        archivo.close();
+        return true;
+    }
+
+    return false;
     }
