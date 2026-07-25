@@ -3,7 +3,7 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "Compilar proyecto C++",
+            "label": "Compilar ProyectoEduca",
             "command": "g++",
             "args": [
                 "-std=c++17",
@@ -14,9 +14,10 @@
                 "-I",
                 "${workspaceFolder}/Include",
 
-                "${workspaceFolder}/Source/main.cpp",
-                "${workspaceFolder}/Source/Usuario.cpp",
-                "${workspaceFolder}/Source/GestorUsuarios.cpp",
+                "${workspaceFolder}/src/main.cpp",
+                "${workspaceFolder}/src/Usuario.cpp",
+                "${workspaceFolder}/src/GestorUsuarios.cpp",
+                "${workspaceFolder}/src/GestorTXT.cpp",
 
                 "-o",
                 "${workspaceFolder}/main.exe"
@@ -31,7 +32,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "Compila el proyecto completo usando g++ disponible en PATH."
+            "detail": "Compila todos los archivos fuente de ProyectoEduca con C++17."
         }
     ]
 }

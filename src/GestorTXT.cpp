@@ -1,6 +1,6 @@
 #include "../Include/GestorTXT.hpp"
 #include "../Include/GestorUsuarios.hpp"
-#include "../include/Usuario.hpp"
+#include "../Include/Usuario.hpp"
 
 #include <fstream>    // std::ifstream para leer y std::ofstream para escribir archivos.
 #include <sstream>   // std::stringstream para separar una línea en diferentes campos.
