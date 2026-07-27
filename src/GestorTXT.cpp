@@ -9,7 +9,7 @@
 #include <exception> // std::exception usada en el bloque catch.
 
  // Constructor y destructor
-    explicit GestorTXT::GestorTXT(const std::string& ruta): rutaUsuarios(ruta){}
+    GestorTXT::GestorTXT(const std::string& ruta): rutaUsuarios(ruta){}
     
 
     // Getter

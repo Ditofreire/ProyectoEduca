@@ -1,0 +1,3 @@
+ESTUDIANTE|Gerardo|Dito|clave123|25|10|5|2000|USFQ
+PUBLISHER|Carlos|Carlitos|clave456|23|20|8|2002|carlos@ejemplo.com
+ESTUDIANTE|Andrea|Andy|clave789|27|15|3|1998|Universidad Central

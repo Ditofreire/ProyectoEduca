@@ -14,7 +14,7 @@ private:
 
 public:
     // Constructor y destructor
-    explicit GestorUsuarios(int capacidadInicial);//
+    explicit GestorUsuarios(int capacidadInicial);// Impide que un int se convierta implícitamente en un objeto GestorUsuarios
     ~GestorUsuarios();
 
     // Evitar copias accidentales por ahora
